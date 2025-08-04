@@ -15,7 +15,7 @@ func main() {
 
 	fmt.Printf("Earning before tax is %.2f\n", ebt)
 	fmt.Printf("Profit is %.2f\n", profit)
-	fmt.Println("Ratio is", ratio)
+	fmt.Printf("Ratio is %.2f\n", ratio)
 }
 
 func acquireValue(val *float64, text string) {
