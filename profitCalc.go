@@ -5,29 +5,30 @@ import "fmt"
 func main() {
 	var revenue, expenses, taxRate float64
 
-	fmt.Println("Enter the revenue")
-	_, err := fmt.Scan(&revenue)
-	if err != nil {
-		return
-	}
+	acquireValue(&revenue, "Enter the revenue")
 
-	fmt.Println("Enter the expenses")
-	_, err = fmt.Scan(&expenses)
-	if err != nil {
-		return
-	}
+	acquireValue(&expenses, "Enter the expenses")
 
-	fmt.Println("Enter the tax rate")
-	_, err = fmt.Scan(&taxRate)
-	if err != nil {
-		return
-	}
+	acquireValue(&taxRate, "Enter the tax rate")
 
-	ebt := revenue - expenses
-	profit := ebt - (1 - taxRate/100)
-	ratio := ebt / profit
+	ebt, profit, ratio := calculateResults(revenue, expenses, taxRate)
 
 	fmt.Printf("Earning before tax is %.2f\n", ebt)
 	fmt.Printf("Profit is %.2f\n", profit)
 	fmt.Println("Ratio is", ratio)
+}
+
+func acquireValue(val *float64, text string) {
+	fmt.Println(text)
+	_, err := fmt.Scan(val)
+	if err != nil {
+		return
+	}
+}
+
+func calculateResults(revenue, expenses, taxRate float64) (ebt, profit, ratio float64) {
+	ebt = revenue - expenses
+	profit = ebt * (1 - taxRate/100)
+	ratio = ebt / profit
+	return
 }
